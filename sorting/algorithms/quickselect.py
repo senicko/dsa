@@ -27,9 +27,9 @@ def quickselect(a, k, l, r):
 
     pivot_index = partition(a, l, r)
 
-    # If pivot index is the sought index, return the found value
-    # If k is smaller than pivot index, search in left subarray
-    # If k is greater or equal to pivot index, search in right subarray
+    # If pivot index is the sought index, return the found value.
+    # If k is smaller than pivot index, search in left subarray.
+    # If k is greater or equal to pivot index, search in right subarray.
 
     if k == pivot_index:
         return a[k]
