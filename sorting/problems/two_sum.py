@@ -95,7 +95,9 @@ Idea:
     We can ignore the left sub array, as we want to check every pair
     just once.
     
-Time Complexity: O(nlogn)
+Time Complexity: 
+    Sorting: O(nlogn)
+    Processing: O(nlogn)
 """
 
 
@@ -129,7 +131,9 @@ Idea:
     
 (3) If l == r it means that we couldn't find a valid pair.
 
-Time Complexity: O(nlogn)
+Time Complexity: 
+    Sorting: O(nlogn)
+    Processing: O(n)
 """
 
 
