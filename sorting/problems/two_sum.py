@@ -1,7 +1,7 @@
 """
-Two sum implementation without Hash Map.
+Two sum implementation without a Hash Map.
 
-The "without Hash Map" is important here, as with it
+The "without a Hash Map" is important here, as with it
 this problem can be solved in O(n) time and O(n) space.
 """
 
