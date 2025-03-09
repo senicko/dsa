@@ -47,18 +47,18 @@ def merge_sort(a, l, r):
         merge(a, l, q, r)
 
 
-def bin_search(a, l, r, v):
-    if l <= r:
-        mid = l + (r - l) // 2
-
-        if a[mid] == v:
-            return True
-        elif v < a[mid]:
-            return bin_search(a, l, mid - 1, v)
-        else:
-            return bin_search(a, mid + 1, r, v)
-    else:
+def binary_search(a, l, r, v):
+    if l > r:
         return False
+
+    mid = l + (r - l) // 2
+
+    if a[mid] == v:
+        return True
+    elif v < a[mid]:
+        return binary_search(a, l, mid - 1, v)
+    else:
+        return binary_search(a, mid + 1, r, v)
 
 
 """
@@ -111,7 +111,7 @@ def two_sum_v2(a, k):
     for i in range(n):
         remainder = k - a[i]
 
-        if bin_search(a, i + 1, n - 1, remainder):
+        if binary_search(a, i + 1, n - 1, remainder):
             return True
 
     return False
