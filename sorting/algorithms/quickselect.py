@@ -1,5 +1,5 @@
 from random import randint
-
+# :)
 
 def partition(a, l, r):
     pivot = a[r]
