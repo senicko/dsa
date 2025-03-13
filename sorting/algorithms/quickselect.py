@@ -17,7 +17,7 @@ def partition(a, l, r):
 
 
 # Selects the k-th smallest index in unsorted array in O(n) time.
-def quickselect(a, k, l, r):
+def quickselect(a, l, r, k):
     # k-th index should be present in the array.
     # We can handle this case in arbitrary way.
     assert l <= k <= r
@@ -46,7 +46,7 @@ for _ in range(20):
     expected = sorted(a)[k]
 
     # test
-    result = quickselect(a, k, 0, len(a) - 1)
+    result = quickselect(a, 0, len(a) - 1, k)
 
     # assert
     assert expected == result

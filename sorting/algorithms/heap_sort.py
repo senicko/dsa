@@ -1,7 +1,9 @@
 from random import randint
 
-left = lambda i : 2*i + 1
-right = lambda i : 2*i + 2
+left = lambda i: 2 * i + 1
+right = lambda i: 2 * i + 2
+parent = lambda i: (i - 1) // 2
+
 
 def max_heapify(heap, n, i):
     l = left(i)
@@ -26,7 +28,7 @@ def build_max_heap(a):
 
     # Heapify bottom-up starting at index of last inner node.
     # hint: Find i for which left child is at index n - 1.
-    for i in range((n // 2) - 1, -1, -1):
+    for i in range(parent(n - 1), -1, -1):
         max_heapify(a, n, i)
 
 
@@ -38,10 +40,10 @@ def heap_sort(a):
     # Shrink the heap. Now n is index of the last leaf.
     # Swap it with the top, so that it's at sorted position in the final array.
     # Run heapify for the leaf, now at index 0, to make sure max heap property is met.
-    while n > 0:
-        n -= 1
-        a[0], a[n] = a[n], a[0]
-        max_heapify(a, n, 0)
+
+    for i in range(n - 1, 0, -1):
+        a[0], a[i] = a[i], a[0]
+        max_heapify(a, i, 0)
 
 
 for _ in range(20):
@@ -55,4 +57,3 @@ for _ in range(20):
     # assert
     assert a == expected
     print(a, "OK")
-
