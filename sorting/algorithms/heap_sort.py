@@ -56,4 +56,4 @@ for _ in range(20):
 
     # assert
     assert a == expected
-    print(a, "OK")
+    print(a, "ok")
