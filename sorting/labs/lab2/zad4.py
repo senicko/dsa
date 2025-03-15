@@ -36,7 +36,6 @@ def insert_heap(heap, n, value):
     if n < len(heap):
         heap[n] = value
     else:
-        # This two lines are enough if our heap has a static size.
         heap.append(value)
 
     n += 1
