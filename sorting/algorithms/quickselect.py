@@ -2,18 +2,16 @@ from random import randint
 
 
 def partition(a, l, r):
-    pivot = a[r]
     i = l - 1
 
     for j in range(l, r):
-        if a[j] < pivot:
+        if a[j] <= a[r]:
             i += 1
             a[i], a[j] = a[j], a[i]
 
-    pivot_index = i + 1
-    a[pivot_index], a[r] = a[r], a[pivot_index]
+    a[i + 1], a[r] = a[r], a[i + 1]
 
-    return pivot_index
+    return i + 1
 
 
 # Selects the k-th smallest index in unsorted array in O(n) time.
@@ -34,9 +32,9 @@ def quickselect(a, l, r, k):
     if k == pivot_index:
         return a[k]
     elif k < pivot_index:
-        return quickselect(a, k, l, pivot_index - 1)
+        return quickselect(a, l, pivot_index - 1, k)
     else:
-        return quickselect(a, k, pivot_index + 1, r)
+        return quickselect(a, pivot_index + 1, r, k)
 
 
 for _ in range(20):
