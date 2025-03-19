@@ -2,20 +2,25 @@ MAX_HEAP = "max_heap"
 MIN_HEAP = "min_heap"
 
 
+# Node is a class that tracks value's heap and index.
+# It allows us to find in which heap value resides and
+# at what index it is in O(1) time.
 class Node:
     def __init__(self, value, index=None, heap=None):
         self.value = value
         self.index = index
         self.heap = heap
 
-    def swap_index(self, other):
-        self.index, other.index = other.index, self.index
-
     def __neg__(self):
         self.value *= -1
         return self
 
+    def swap_index(self, other):
+        self.index, other.index = other.index, self.index
 
+
+# MinHeap implementation that manages Nodes and updates their
+# indexes during heap operations.
 class MinHeap:
     def __init__(self, n, id=None):
         self.heap = [None] * n
@@ -70,11 +75,6 @@ class MinHeap:
         self.heap[self.size].swap_index(self.heap[i])
         self.heap[self.size], self.heap[i] = self.heap[i], self.heap[self.size]
 
-        # This is not strictly necessary, as the index at which
-        # the removed value resides is out of bounds, however it's
-        # easier to catch some possible bugs.
-        self.heap[self.size] = None
-
         if self.size != i:
             # Make sure min heap property is maintained
             self.heapify_up(i)
@@ -86,19 +86,19 @@ class MinHeap:
 def ksum(T, k, p):
     n = len(T)
 
-    # Preprocess.
-
     for i in range(n):
         T[i] = Node(T[i])
 
     min_heap = MinHeap(n, MIN_HEAP)
     max_heap = MinHeap(n, MAX_HEAP)
 
-    # Load initial window.
-
+    # Load first k values to min_heap.
     for i in range(k):
         min_heap.insert(T[i])
 
+    # Load the rest of p first values to min_heap or max_heap
+    # maintaining the property that min_heap keeps the k largest
+    # values in the window.
     for i in range(k, p):
         if T[i].value > min_heap.top():
             max_heap.insert(-min_heap.remove(0))
@@ -106,31 +106,25 @@ def ksum(T, k, p):
         else:
             max_heap.insert(-T[i])
 
-    # Process the rest of values with a sliding window.
-
     total = 0
 
     for i in range(p, n):
         # Add the kth largest element from previous window to total sum.
-
         total += min_heap.top()
 
-        # Find outgoing node, and remove it from its heap.
-
+        # Get outgoing and incoming nodes.
         outgoing = T[i - p]
-
-        if outgoing.heap == MIN_HEAP:
-            min_heap.remove(outgoing.index)
-        else:
-            max_heap.remove(outgoing.index)
-
-        # Find incoming node and insert it to appropriate heap.
-
         incoming = T[i]
+
+        # Remove outgoing node from its heap.
+        # Insert incoming node to appropriate heap.
+
+        min_heap.remove(outgoing.index) if outgoing.heap == MIN_HEAP else max_heap.remove(outgoing.index)
         min_heap.insert(incoming)
 
         # It's possible that after removing outgoing node
         # max_heap's top belongs to the kth largest ones.
+
         if max_heap.size > 0:
             min_heap.insert(-max_heap.remove(0))
 
