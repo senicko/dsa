@@ -27,7 +27,7 @@ def quickselect(a, l, r, k):
 
     # If pivot index is the sought index, return the found value.
     # If k is smaller than pivot index, search in left subarray.
-    # If k is greater or equal to pivot index, search in right subarray.
+    # If k is greater to pivot index, search in right subarray.
 
     if k == pivot_index:
         return a[k]
