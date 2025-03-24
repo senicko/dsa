@@ -1,46 +1,55 @@
-from random import randint
+from random import uniform
 
 
-class Node:
-    def __init__(self, value=None):
-        self.value = value
-        self.next = None
-
-
-def bucket_sort(a, limit):
+# Doing insertion sort this way (without swapping)
+# reduces number of operations performed in the inner
+# while loop.
+def insertion_sort(a):
     n = len(a)
 
-    # Create bucket for each value
-    buckets = [[b := Node(), b] for _ in range(limit + 1)]
+    for i in range(1, n):
+        key = a[i]
+        j = i - 1
 
-    # Iterate through values inarray a and insert
-    # them in correct buckets.
-    for i in range(n):
-        new = Node(a[i])
-        idx = a[i]
-        buckets[idx][1].next = new
-        buckets[idx][1] = new
+        while j >= 0 and a[j] >= key:
+            a[j + 1] = a[j]
+            j -= 1
 
-    # Iterate through buckets (which are stored in sorted order)
-    # and dump values back to a.
-    i = 0
+        a[j + 1] = key
 
+
+def bucket_sort(a):
+    n = len(a)
+    buckets = [[] for _ in range(n)]
+
+    min_v = min(a)
+    max_v = max(a)
+    span = max_v - min_v + 1
+
+    # Insert values to their buckets
+    for v in a:
+        bucket_index = int((v - min_v) / span * (n - 1))
+        buckets[bucket_index].append(v)
+
+    # Sort each bucket with insertion sort.
     for bucket in buckets:
-        curr = bucket[0].next
+        insertion_sort(bucket)
 
-        while curr:
-            a[i] = curr.value
-            curr = curr.next
-            i += 1
+    # Insert sorted values back to a
+    k = 0
+    for bucket in buckets:
+        for v in bucket:
+            a[k] = v
+            k += 1
 
 
 for _ in range(20):
     # arrange
-    a = [randint(100, 999) for _ in range(15)]
+    a = [uniform(100, 999) for _ in range(15)]
     expected = sorted(a)
 
     # test
-    bucket_sort(a, max(a))
+    bucket_sort(a)
 
     # assert
     assert a == expected
