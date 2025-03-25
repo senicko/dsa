@@ -5,7 +5,7 @@ MIN_HEAP = "min_heap"
 # Node is a class that tracks value's heap and index.
 # It allows us to find in which heap value resides and
 # at what index it is in O(1) time.
-class Node:
+class Value:
     def __init__(self, value, index=None, heap=None):
         self.value = value
         self.index = index
@@ -87,7 +87,7 @@ def ksum(T, k, p):
     n = len(T)
 
     for i in range(n):
-        T[i] = Node(T[i])
+        T[i] = Value(T[i])
 
     min_heap = MinHeap(n, MIN_HEAP)
     max_heap = MinHeap(n, MAX_HEAP)
