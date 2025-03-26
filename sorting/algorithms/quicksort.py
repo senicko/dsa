@@ -1,7 +1,7 @@
 from random import randint
 
 
-# Hoare's partitioning algorithm.
+# Lomuto's partitioning algorithm.
 def partition(a, l, r):
     # Pick the rightmost element as a pivot
     # and keep track of the highest index in the "low" subarray.
@@ -12,7 +12,7 @@ def partition(a, l, r):
     for j in range(l, r):
         # If value a[j] belongs to the "low" subarray,
         # make it wider and move the value into it.
-        if a[j] < pivot:
+        if a[j] <= pivot:
             i += 1
             a[i], a[j] = a[j], a[i]
 

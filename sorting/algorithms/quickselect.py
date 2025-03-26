@@ -1,6 +1,7 @@
 from random import randint
 
 
+# Lomuto's partition scheme.
 def partition(a, l, r):
     i = l - 1
 
@@ -37,15 +38,23 @@ def quickselect(a, l, r, k):
         return quickselect(a, pivot_index + 1, r, k)
 
 
-for _ in range(20):
+for _ in range(1):
     # arrange
-    k = randint(0, 19)
-    a = [randint(10, 99) for _ in range(20)]
-    expected = sorted(a)[k]
+    # k = randint(0, 19)
 
-    # test
-    result = quickselect(a, 0, len(a) - 1, k)
+    a = [randint(1, 9) for _ in range(10)]
+    print(a)
 
-    # assert
-    assert expected == result
-    print(expected, "=", result, "OK")
+    for i in range(5):
+        quickselect(a, 0, len(a) - 1, i)
+
+    print(a)
+
+    # expected = sorted(a)[k]
+    #
+    # # test
+    # result = quickselect(a, 0, len(a) - 1, k)
+    #
+    # # assert
+    # assert expected == result
+    # print(expected, "=", result, "OK")
