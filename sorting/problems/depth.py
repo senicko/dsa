@@ -15,6 +15,8 @@ def merge(L, l, mid, r):
     j = 0
     k = l
 
+    # We want to sort ranges in descending order by range start.
+    # If two ranges have the same start, we want to sort them ascending by range end.
     while i < len(left) and j < len(right):
         if left[i][LEFT] > right[j][LEFT] or \
                 (left[i][LEFT] == right[j][LEFT] and left[i][RIGHT] < right[j][RIGHT]):
