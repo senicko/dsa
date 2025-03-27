@@ -8,39 +8,36 @@ counted in the deeper level of.
 
 
 def merge(A, l, mid, r):
-    left_n = mid - l + 1
-    right_n = r - mid
-
-    left = A[l:l + left_n]
-    right = A[mid + 1:mid + 1 + right_n]
+    left = A[l:mid + 1]
+    right = A[mid + 1:r + 1]
 
     i = 0
     j = 0
     k = l
-    less_count = 0
+    counter = 0
 
-    while i < left_n and j < right_n:
+    while i < len(left) and j < len(right):
         if left[i][0] < right[j][0]:
             A[k] = left[i]
             i += 1
             # Inc less elements counter
-            less_count += 1
+            counter += 1
         else:
             A[k] = right[j]
             # Inc number of inversions
-            right[j][1] += less_count
+            right[j][1] += counter
             j += 1
         k += 1
 
-    while i < left_n:
+    while i < len(left):
         A[k] = left[i]
         i += 1
         k += 1
 
-    while j < right_n:
+    while j < len(right):
         A[k] = right[j]
         # Inc number of inversions
-        right[j][1] += less_count
+        right[j][1] += counter
         j += 1
         k += 1
 
