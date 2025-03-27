@@ -2,10 +2,10 @@ from random import randint
 
 '''
 (1) Store number of elements equal to
-    x at index x in array count.
+    x at index count[x].
 
 (2) Store number of elements less than or equal
-    to x in at position x in array count.
+    to x at count[x].
 
 (3) At this point we have an array count which stores number of elements
     less than or equal to x, where x is the index. So count[200] = 100
@@ -29,14 +29,14 @@ def counting_sort(a, n, limit):
 
     # (2)
     for i in range(1, limit + 1):
-        count[i] = count[i] + count[i - 1]
+        count[i] += count[i - 1]
 
     # (3)
 
     # (4)
     for i in range(n - 1, -1, -1):
-        out[count[a[i]] - 1] = a[i]
         count[a[i]] -= 1
+        out[count[a[i]]] = a[i]
 
     return out
 

@@ -1,37 +1,39 @@
 """
 Proszę zaproponować algorytm, który mając na wejsciu tablicę A zwraca liczbę jej inwersji
-(t.j, liczbę par indeksów i < j takich, że A[i] > A[i].)
+(t.j, liczbę par indeksów i < j takich, że A[i] > A[j].)
 """
 
 
 def merge(a, l, mid, r):
-    left_n = mid - l + 1
-    right_n = r - mid
     inversions = 0
 
-    left = a[l:l + left_n]
-    right = a[mid + 1:mid + 1 + right_n]
+    left = a[l:mid + 1]
+    right = a[mid + 1: r + 1]
 
     i = 0
     j = 0
     k = l
 
-    while i < left_n and j < right_n:
+    while i < len(left) and j < len(right):
         if left[i] <= right[j]:
             a[k] = left[i]
             i += 1
         else:
-            inversions += left_n - i
+            inversions += len(left) - i
             a[k] = right[j]
             j += 1
         k += 1
 
-    while i < left_n:
+    while i < len(left):
+        # We don't count any inversions here.
+        # All inversions for smaller elements from right
+        # subarray were already counted in the while above.
+
         a[k] = left[i]
         i += 1
         k += 1
 
-    while j < right_n:
+    while j < len(right):
         a[k] = right[j]
         j += 1
         k += 1

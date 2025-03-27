@@ -1,10 +1,16 @@
-from typing import Self, cast
-
-
 class Node:
     def __init__(self, value=None, next=None):
-        self.value = value 
+        self.value = value
         self.next = next
+
+    def __repr__(self):
+        out = "["
+        curr = self.next
+        while curr:
+            out += f"{curr.value}->"
+            curr = curr.next
+        out += "]"
+        return out
 
     @staticmethod
     def from_list(values):
@@ -17,14 +23,6 @@ class Node:
             head = new
 
         return dummy
-
-
-def print_list(p):
-    curr = p.next
-    while curr:
-        print(curr.value, end=" -> ")
-        curr = curr.next
-    print("None")
 
 
 # Extracts parent of a node with minimum value.
@@ -90,4 +88,3 @@ for test in [
 ]:
     ll = Node.from_list(test)
     selection_sort(ll)
-    print_list(ll)

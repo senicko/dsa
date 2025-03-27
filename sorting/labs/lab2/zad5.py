@@ -1,21 +1,25 @@
-type Point = tuple[int, int]
-
 E_OPEN = "open"
 E_CLOSE = "close"
 
+type Point = tuple[int, int]
+
+
+class Event:
+    def __init__(self, type, y, width):
+        self.type = type
+        self.y = y
+        self.width = width
+
 
 def merge(a, l, mid, r):
-    left_n = mid - l + 1
-    right_n = r - mid
-
-    left = a[l:l + left_n]
-    right = a[mid + 1:mid + 1 + right_n]
+    left = a[l:mid + 1]
+    right = a[mid + 1:r + 1]
 
     i = 0
     j = 0
     k = l
 
-    while i < left_n and j < right_n:
+    while i < len(left) and j < len(right):
         if left[i].y < right[j].y:
             a[k] = left[i]
             i += 1
@@ -24,12 +28,12 @@ def merge(a, l, mid, r):
             j += 1
         k += 1
 
-    while i < left_n:
+    while i < len(left):
         a[k] = left[i]
         i += 1
         k += 1
 
-    while j < right_n:
+    while j < len(right):
         a[k] = right[j]
         j += 1
         k += 1
@@ -41,13 +45,6 @@ def merge_sort(a, l, r):
         merge_sort(a, l, mid)
         merge_sort(a, mid + 1, r)
         merge(a, l, mid, r)
-
-
-class Event:
-    def __init__(self, type, y, width):
-        self.type = type
-        self.y = y
-        self.width = width
 
 
 def find_filled_tanks(a: list[tuple[Point, Point]], water):
@@ -71,6 +68,7 @@ def find_filled_tanks(a: list[tuple[Point, Point]], water):
     # Process sorted events.
     for e in events:
         water -= current_width * (e.y - current_y)
+
         if water < 0:
             break
 

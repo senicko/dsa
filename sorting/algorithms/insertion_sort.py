@@ -5,14 +5,14 @@ def insertion_sort(a):
     n = len(a)
 
     for i in range(1, n):
-        # Note that initially j + 1 is just i, so the value we want to insert
-        # at the valid spot.
+        key = a[i]
         j = i - 1
 
-        # Swap elements as long as value at a[j] is greater than value at a[j + 1]
-        while j >= 0 and a[j] > a[j + 1]:
-            a[j], a[j + 1] = a[j + 1], a[j]
+        while j >= 0 and a[j] >= key:
+            a[j + 1] = a[j]
             j -= 1
+
+        a[j + 1] = key
 
 
 for _ in range(20):
@@ -26,4 +26,3 @@ for _ in range(20):
     # assert
     assert a == expected
     print(a, "OK")
-

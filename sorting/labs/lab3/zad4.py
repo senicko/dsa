@@ -31,18 +31,17 @@ def max_diff(T):
     prev_low = buckets[0][0]
 
     for i in range(1, n):
-        bucket = buckets[i]
-
-        if bucket[0] == float("inf"):
+        # Skip empty spans.
+        if buckets[i][0] == float("inf"):
             continue
 
-        if result_high - result_low < bucket[1] - prev_low:
+        if result_high - result_low < buckets[i][1] - prev_low:
             result_low = prev_low
-            result_high = bucket[1]
+            result_high = buckets[i][1]
 
-        prev_low = bucket[0]
+        prev_low = buckets[i][0]
 
-    return (result_low, result_high)
+    return result_low, result_high
 
 
 if __name__ == "__main__":

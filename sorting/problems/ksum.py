@@ -1,3 +1,5 @@
+from sorting.algorithms.bucket_sort import bucket_sort
+
 MAX_HEAP = "max_heap"
 MIN_HEAP = "min_heap"
 

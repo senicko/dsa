@@ -10,13 +10,8 @@ class MinHeap:
         self.size = 0
         self.values = []
 
-    # Returns left child of index i.
     left = lambda i: 2 * i + 1
-
-    # Returns right child of index i.
     right = lambda i: 2 * i + 2
-
-    # Returns parent of index i.
     parent = lambda i: (i - 1) // 2
 
     def heapify(self, i):
@@ -77,7 +72,6 @@ class Median:
 
         # Rebalance heaps.
         self._rebalance()
-
 
     def remove_median(self):
         median = self.get_median()

@@ -9,6 +9,15 @@ class Node:
         self.value = None
         self.next = None
 
+    def __repr__(self):
+        out = "["
+        curr = self
+        while curr:
+            out += f"{curr.value}->"
+            curr = curr.next
+        out += "]"
+        return out
+
     @staticmethod
     def from_list(values: list[int]):
         dummy = Node()
@@ -23,14 +32,6 @@ class Node:
         return dummy.next
 
 
-    def print(self):
-        curr = self
-        while curr:
-            print(curr.value, end=" -> ")
-            curr = curr.next
-        print("None")
-
-
 def merge_lists(p: Node, q: Node):
     dummy = Node()
     prev = dummy
@@ -39,9 +40,9 @@ def merge_lists(p: Node, q: Node):
     while p and q:
         # Pick node with the smallest value.
         if p.value < q.value:
-            prev.next = p   # Chain it with prev
-            prev = p        # Set prev to p
-            p = p.next      # Advance p
+            prev.next = p  # Chain it with prev
+            prev = p  # Set prev to p
+            p = p.next  # Advance p
         else:
             prev.next = q
             prev = q
@@ -63,4 +64,4 @@ if __name__ == "__main__":
     a = Node.from_list([1, 3, 5, 7, 9, 11])
     b = Node.from_list([2, 4, 6, 8, 10, 12, 14, 16])
     out = merge_lists(a, b)
-    out.print()
+    print(out)

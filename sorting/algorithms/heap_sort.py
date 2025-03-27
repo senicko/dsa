@@ -27,7 +27,6 @@ def build_max_heap(a):
     n = len(a)
 
     # Heapify bottom-up starting at index of last inner node.
-    # hint: Find i for which left child is at index n - 1.
     for i in range(parent(n - 1), -1, -1):
         max_heapify(a, n, i)
 

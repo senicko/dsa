@@ -19,16 +19,14 @@ class Node:
 
         return dummy
 
-
-def print_list(p: Node):
-    print("[", end="")
-
-    curr = p.next
-    while curr:
-        print(curr.value, end="->")
-        curr = curr.next
-
-    print("]")
+    def __repr__(self):
+        out = "["
+        curr = self.next
+        while curr:
+            out += f"{curr.value}->"
+            curr = curr.next
+        out += "]"
+        return out
 
 
 def insert_sorted(p: Node, v: int):
@@ -53,4 +51,4 @@ def insert_sorted(p: Node, v: int):
 
 ll = Node.from_list([1, 2, 3, 4, 5, 7, 8, 9])
 insert_sorted(ll, 6)
-print_list(ll)
+print(ll)

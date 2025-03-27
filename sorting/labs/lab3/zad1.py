@@ -20,18 +20,16 @@ def partition(A, l, r):
 
 
 def quicksort(A, l, r):
-    # (1)
-    # Usuwamy rekurencję ogonową, wykorzystując pętlę
-    # zamiast ifa. Dzięki temu quicksort robi 2 razy mniej
-    # wywołań rekurencyjnych. Ta optymalizacja nie gwarantuje jeszcze pamięci `O(nlogn)`.
+    # (1)   Usuwamy rekurencję ogonową, wykorzystując pętlę
+    #       zamiast ifa. Dzięki temu quicksort robi 2 razy mniej
+    #       wywołań rekurencyjnych. Ta optymalizacja nie gwarantuje jeszcze pamięci `O(nlogn)`.
     while l < r:
         pivot = partition(A, l, r)
 
-        # (2)
-        # Po wybraniu pivot'a mniejszy przedział chcemy obsłużyć wywołaniem rekurencyjnym,
-        # a większy przedział iteracyjnie dzięki pętli while.
-        # To zagwarantuje nam zużycie pamięci `O(logn)`, ponieważ w najgorszym przypadku, kiedy
-        # oba przedziały będą równej długości, zrobimy `logn` wywołań rekurencyjnych.
+        # (2)   Po wybraniu pivot'a mniejszy przedział chcemy obsłużyć wywołaniem rekurencyjnym,
+        #       a większy przedział iteracyjnie dzięki pętli while.
+        #       To zagwarantuje nam zużycie pamięci `O(logn)`, ponieważ w najgorszym przypadku, kiedy
+        #       oba przedziały będą równej długości, zrobimy `logn` wywołań rekurencyjnych.
 
         if pivot - l < r - pivot:
             # Jeżeli lewy przedział jest mniejszy niż prawy przedział.

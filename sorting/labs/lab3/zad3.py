@@ -13,25 +13,25 @@ from random import randint
 
 def sort(a):
     n = len(a)
-    a = counting_sort(a, lambda x: x % n)
-    a = counting_sort(a, lambda x: x // 10)
+    a = counting_sort(a, key=lambda x: x % n)
+    a = counting_sort(a, key=lambda x: x // 10)
     return a
 
 
-def counting_sort(a, key_fn):
+def counting_sort(a, key):
     n = len(a)
     c = [0] * n
     b = [0] * n
 
     for i in range(n):
-        c[key_fn(a[i])] += 1
+        c[key(a[i])] += 1
 
     for i in range(1, n):
         c[i] += c[i - 1]
 
     for i in range(n - 1, -1, -1):
-        c[key_fn(a[i])] -= 1
-        b[c[key_fn(a[i])]] = a[i]
+        c[key(a[i])] -= 1
+        b[c[key(a[i])]] = a[i]
 
     return b
 

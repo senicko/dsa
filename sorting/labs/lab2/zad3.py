@@ -4,10 +4,20 @@ Proszę zaimplementować MergeSort dla listy jednokierunkowej.
 
 from zad2 import merge_lists
 
+
 class Node:
     def __init__(self):
         self.value = None
         self.next = None
+
+    def __repr__(self):
+        out = "["
+        curr = self
+        while curr:
+            out += f"{curr.value}->"
+            curr = curr.next
+        out += "]"
+        return out
 
     @staticmethod
     def from_list(values: list[int]):
@@ -23,16 +33,8 @@ class Node:
         return dummy.next
 
 
-    def print(self):
-        curr = self
-        while curr:
-            print(curr.value, end=" -> ")
-            curr = curr.next
-        print("None")
-
-
 def extract_mid(l, n):
-    # We want to use this function only
+    # We must to use this function only
     # when there are at least 2 nodes.
     assert n > 1
 

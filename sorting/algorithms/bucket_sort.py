@@ -24,7 +24,7 @@ def bucket_sort(a):
 
     min_v = min(a)
     max_v = max(a)
-    span = max_v - min_v + 1
+    span = max_v - min_v
 
     # Insert values to their buckets
     for v in a:

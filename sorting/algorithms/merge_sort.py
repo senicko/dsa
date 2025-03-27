@@ -2,20 +2,16 @@ from random import randint
 
 
 def merge(a, l, mid, r):
-    # Find number of elements in the left and right subarray
-    n_left = mid - l + 1
-    n_right = r - mid
-
     # Copy values from left and right subarray for merge operation
-    left = a[l:l + n_left]
-    right = a[mid + 1:mid + 1 + n_right]
+    left = a[l:mid + 1]
+    right = a[mid + 1:r + 1]
 
     i = 0
     j = 0
     k = l  # keep tract of insert position in original array
 
     # While both pointers are not finished
-    while i < n_left and j < n_right:
+    while i < len(left) and j < len(right):
         # Choose smaller value and insert it to original array
         if left[i] <= right[j]:
             a[k] = left[i]
@@ -28,12 +24,12 @@ def merge(a, l, mid, r):
     # Make sure all values from left and right subarray
     # are inserted to original array.
 
-    while i < n_left:
+    while i < len(left):
         a[k] = left[i]
         i += 1
         k += 1
 
-    while j < n_right:
+    while j < len(right):
         a[k] = right[j]
         j += 1
         k += 1

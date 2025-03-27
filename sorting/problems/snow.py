@@ -51,5 +51,5 @@ def snow(a):
 
 
 if __name__ == "__main__":
-    a = [1, 7, 3, 4, 1]
+    a = [6, 6, 6, 6, 7, 6, 6, 6, 6]
     print(snow(a))
