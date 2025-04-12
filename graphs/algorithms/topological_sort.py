@@ -1,45 +1,26 @@
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-
-    def print(self, map):
-        repr = ""
-        curr = self
-        count = 0
-
-        while curr:
-            repr += f"{count}. {map[curr.value]}\n"
-            curr = curr.next
-            count += 1
-
-        print(repr)
-
-
 def topological_sort(graph):
     n = len(graph)
-    sorted = None
+    result = []
     visited = [False] * n
 
     def dfs_visit(v):
-        nonlocal sorted
+        nonlocal result
         visited[v] = True
 
         for u in graph[v]:
             if not visited[u]:
                 dfs_visit(u)
 
-        node = Node(v)
-        node.next = sorted
-        sorted = node
+        # (1)   Regular DFS. We are just adding
+        #       nodes to the result array.
 
-    # Run DFS visit for every node so that
-    # we don't skip disconnected components.
+        result.append(v)
+
     for v in range(n):
         if not visited[v]:
             dfs_visit(v)
 
-    return sorted
+    return reversed(result)
 
 
 if __name__ == "__main__":
@@ -56,16 +37,16 @@ if __name__ == "__main__":
     }
 
     graph = [
-        [1, 6],  # undershorts
-        [2, 6],  # pants
-        [5],  # belt
-        [2, 4],  # shirt
-        [5],  # tie
-        [],  # jacket
-        [],  # shoes
-        [6],  # socks
-        []  # watch
+        [1, 6],
+        [2, 6],
+        [5],
+        [2, 4],
+        [5],
+        [],
+        [],
+        [6],
+        []
     ]
 
     sorted_events = topological_sort(graph)
-    sorted_events.print(names)
+    print([names[e] for e in sorted_events])

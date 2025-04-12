@@ -23,17 +23,16 @@ def build_transpose(graph):
     return transpose
 
 
-# Builds a transpose of the given graph.
-def transpose_dfs(graph, visit_times):
+def extract_components(graph, visit_times):
     n = len(graph)
 
-    forests = []
+    components = []
     visited = [False] * n
 
     def dfs_visit(v):
         for u in graph[v]:
             if not visited[u]:
-                forests[-1].append(u)
+                components[-1].append(u)
                 visited[u] = True
                 dfs_visit(u)
 
@@ -49,11 +48,11 @@ def transpose_dfs(graph, visit_times):
         v = entry.data
 
         if not visited[v]:
-            forests.append([v])
+            components.append([v])
             visited[v] = True
             dfs_visit(v)
 
-    return forests
+    return components
 
 
 # Computes BFS finish times for every node.
@@ -87,7 +86,7 @@ def compute_finish_times(graph):
 def strongly_connected_components(graph):
     finish_times = compute_finish_times(graph)
     transpose = build_transpose(graph)
-    return transpose_dfs(transpose, finish_times)
+    return extract_components(transpose, finish_times)
 
 
 if __name__ == "__main__":
