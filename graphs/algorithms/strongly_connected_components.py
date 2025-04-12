@@ -3,15 +3,14 @@ from queue import PriorityQueue
 
 
 class PriorityQueueEntry(object):
-    def __init__(self, priority, data):
+    def __init__(self, priority, value):
         self.priority = priority
-        self.data = data
+        self.data = value
 
     def __lt__(self, other):
         return self.priority < other.priority
 
 
-# Reverses the direction of edges in the graph.
 def build_transpose(graph):
     n = len(graph)
     transpose = [[] for _ in range(n)]
@@ -23,42 +22,8 @@ def build_transpose(graph):
     return transpose
 
 
-def extract_components(graph, visit_times):
-    n = len(graph)
-
-    components = []
-    visited = [False] * n
-
-    def dfs_visit(v):
-        for u in graph[v]:
-            if not visited[u]:
-                components[-1].append(u)
-                visited[u] = True
-                dfs_visit(u)
-
-    # Process vertices in order of their finish times.
-
-    priority_queue = PriorityQueue()
-
-    for v in range(n):
-        priority_queue.put(PriorityQueueEntry(-visit_times[v], v))
-
-    while not priority_queue.empty():
-        entry = priority_queue.get()
-        v = entry.data
-
-        if not visited[v]:
-            components.append([v])
-            visited[v] = True
-            dfs_visit(v)
-
-    return components
-
-
-# Computes BFS finish times for every node.
 def compute_finish_times(graph):
     n = len(graph)
-
     time = 0
     visited = [False] * n
     finish = [inf] * n
@@ -81,6 +46,38 @@ def compute_finish_times(graph):
             dfs_visit(v)
 
     return finish
+
+
+def extract_components(graph, visit_times):
+    n = len(graph)
+    components = []
+    visited = [False] * n
+    priority_queue = PriorityQueue()
+
+    for v in range(n):
+        # Lower number has a higher priority, so we insert
+        # vertices with negative visit times.
+        priority_queue.put(PriorityQueueEntry(-visit_times[v], v))
+
+    def dfs_visit(v):
+        for u in graph[v]:
+            if not visited[u]:
+                components[-1].append(u)
+                visited[u] = True
+                dfs_visit(u)
+
+    # Process vertices in descending order of
+    # their discovery times.
+
+    while not priority_queue.empty():
+        v = priority_queue.get().value
+
+        if not visited[v]:
+            components.append([v])
+            visited[v] = True
+            dfs_visit(v)
+
+    return components
 
 
 def strongly_connected_components(graph):
