@@ -1,5 +1,4 @@
 from math import inf
-from queue import PriorityQueue
 
 
 class PriorityQueueEntry(object):
@@ -22,11 +21,11 @@ def build_transpose(graph):
     return transpose
 
 
-def compute_finish_times(graph):
+def compute_finish_order(graph):
     n = len(graph)
     time = 0
     visited = [False] * n
-    finish = [inf] * n
+    finish_order = []
 
     def dfs_visit(v):
         nonlocal time
@@ -38,26 +37,22 @@ def compute_finish_times(graph):
                 dfs_visit(u)
 
         time += 1
-        finish[v] = time
+        # Append vertex to finish_order array after processing.
+        # Note that vertices will be ordered in ascending order.
+        finish_order.append(v)
 
     for v in range(n):
         if not visited[v]:
             visited[v] = True
             dfs_visit(v)
 
-    return finish
+    return finish_order
 
 
-def extract_components(graph, visit_times):
+def extract_components(graph, finish_times):
     n = len(graph)
     components = []
     visited = [False] * n
-    priority_queue = PriorityQueue()
-
-    for v in range(n):
-        # Lower number has a higher priority, so we insert
-        # vertices with negative visit times.
-        priority_queue.put(PriorityQueueEntry(-visit_times[v], v))
 
     def dfs_visit(v):
         for u in graph[v]:
@@ -68,9 +63,8 @@ def extract_components(graph, visit_times):
 
     # Process vertices in descending order of
     # their discovery times.
-
-    while not priority_queue.empty():
-        v = priority_queue.get().value
+    for i in range(len(finish_times) - 1, -1, -1):
+        v = finish_times[i]
 
         if not visited[v]:
             components.append([v])
@@ -81,9 +75,9 @@ def extract_components(graph, visit_times):
 
 
 def strongly_connected_components(graph):
-    finish_times = compute_finish_times(graph)
+    finish_order = compute_finish_order(graph)
     transpose = build_transpose(graph)
-    return extract_components(transpose, finish_times)
+    return extract_components(transpose, finish_order)
 
 
 if __name__ == "__main__":
