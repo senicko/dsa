@@ -1,6 +1,3 @@
-"""
-Kahan's algorithm for topological sorting.
-"""
 from collections import deque
 
 
@@ -8,8 +5,8 @@ def topological_sort_kahan(graph):
     n = len(graph)
     result = []
 
-    # (1)   Count in-degree of every vertex
-    #       in the graph.
+    # Count in-degree of every vertex
+    # in the graph.
 
     in_deg = [0] * n
 
@@ -17,8 +14,8 @@ def topological_sort_kahan(graph):
         for u in graph[v]:
             in_deg[u] += 1
 
-    # (2)   Add vertices with in-degree of 0
-    #       to a queue.
+    # Add vertices with in-degree of 0
+    # to a queue.
 
     queue = deque([v for v in range(n) if in_deg[v] == 0])
 
@@ -26,14 +23,14 @@ def topological_sort_kahan(graph):
         v = queue.pop()
         result.append(v)
 
-        # (3)   Update in-degree of v's neighbours
-        #       by decrementing them by one.
+        # Update in-degree of v's neighbours
+        # by decrementing them by one.
 
         for u in graph[v]:
             in_deg[u] -= 1
 
-            # (4)   If u's in-degree reached 0,
-            #       add it to the queue.
+            # If u's in-degree reached 0,
+            # add it to the queue.
 
             if in_deg[u] == 0:
                 queue.appendleft(u)

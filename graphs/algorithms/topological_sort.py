@@ -11,14 +11,18 @@ def topological_sort(graph):
             if not visited[u]:
                 dfs_visit(u)
 
-        # (1)   Regular DFS. We are just adding
-        #       nodes to the result array.
+        # Regular DFS. We are just adding
+        # nodes to the result array.
 
         result.append(v)
 
     for v in range(n):
         if not visited[v]:
             dfs_visit(v)
+
+    # At the end we have to reverse the result
+    # array as in line 17, we actually want
+    # to append to the beginning of the list.
 
     return reversed(result)
 
