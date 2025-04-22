@@ -1,15 +1,6 @@
 from math import inf
 
 
-class PriorityQueueEntry(object):
-    def __init__(self, priority, value):
-        self.priority = priority
-        self.data = value
-
-    def __lt__(self, other):
-        return self.priority < other.priority
-
-
 def build_transpose(graph):
     n = len(graph)
     transpose = [[] for _ in range(n)]
@@ -23,22 +14,18 @@ def build_transpose(graph):
 
 def compute_finish_order(graph):
     n = len(graph)
-    time = 0
     visited = [False] * n
     finish_order = []
 
     def dfs_visit(v):
-        nonlocal time
-        time += 1
-
         for u in graph[v]:
             if not visited[u]:
                 visited[u] = True
                 dfs_visit(u)
 
-        time += 1
         # Append vertex to finish_order array after processing.
         # Note that vertices will be ordered in ascending order.
+
         finish_order.append(v)
 
     for v in range(n):
@@ -63,6 +50,7 @@ def extract_components(graph, finish_times):
 
     # Process vertices in descending order of
     # their discovery times.
+
     for i in range(len(finish_times) - 1, -1, -1):
         v = finish_times[i]
 
@@ -81,5 +69,15 @@ def strongly_connected_components(graph):
 
 
 if __name__ == "__main__":
-    graph = [[1], [2, 6, 5], [3], [4, 2], [4], [0, 2], [3, 7], [4, 6]]
+    graph = [
+        [1],
+        [2, 6, 5],
+        [3],
+        [4, 2],
+        [4],
+        [0, 2],
+        [3, 7],
+        [4, 6]
+    ]
+
     print(strongly_connected_components(graph))
