@@ -5,10 +5,10 @@ def dfs_list(graph):
     n = len(graph)
 
     time = 0
-    visited = [False for _ in range(n)]
-    parent = [None for _ in range(n)]
-    discovery = [inf for _ in range(n)]
-    processed = [inf for _ in range(n)]
+    visited = [False] * n
+    parent = [None] * n
+    discovery = [inf] * n
+    processed = [inf] * n
 
     def dfs_visit(v):
         nonlocal time
@@ -38,10 +38,10 @@ def dfs_matrix(graph):
     n = len(graph)
 
     time = 0
-    visited = [False for _ in range(n)]
-    parent = [None for _ in range(n)]
-    discovery = [inf for _ in range(n)]
-    processed = [inf for _ in range(n)]
+    visited = [False] * n
+    parent = [None] * n
+    discovery = [inf] * n
+    processed = [inf] * n
 
     def dfs_visit(v):
         nonlocal time

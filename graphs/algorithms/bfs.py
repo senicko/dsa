@@ -7,9 +7,9 @@ def bfs_list(graph, s):
     queue = deque()
 
     # Initialize state arrays.
-    visited = [False for _ in range(n)]
-    parent = [None for _ in range(n)]
-    distance = [inf for _ in range(n)]
+    visited = [False] * n
+    parent = [None] * n
+    distance = [inf] * n
 
     # Mark starting node as visited.
     visited[s] = True
@@ -39,9 +39,9 @@ def bfs_matrix(graph, s):
     queue = deque()
 
     # Initialize state arrays.
-    visited = [False for _ in range(n)]
-    parent = [None for _ in range(n)]
-    distance = [inf for _ in range(n)]
+    visited = [False] * n
+    parent = [None] * n
+    distance = [inf] * n
 
     # Mark starting node as visited.
     visited[s] = True
