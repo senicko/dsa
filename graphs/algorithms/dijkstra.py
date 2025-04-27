@@ -14,7 +14,7 @@ def dijkstra(G, s):
     queue.put((dist[s], s))
 
     while not queue.empty():
-        d, v = queue.get()
+        _, v = queue.get()
 
         # Skip already visited vertices.
         # It is possible that some vertices
