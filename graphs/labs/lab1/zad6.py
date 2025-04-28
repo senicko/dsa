@@ -7,12 +7,12 @@ def shortest_path_from(graph, s):
     n = len(graph)
     queue = deque()
 
-    # State.
+    # State
     distance = [inf] * n
     visited = [False] * n
     parents = [None] * n
 
-    # Process starting vertex.
+    # Process starting vertex
     distance[s] = 0
     visited[s] = True
     queue.appendleft(s)

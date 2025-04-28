@@ -29,16 +29,14 @@ def kings_path(A):
     # Process first position
 
     visited[0][0] = True
-    queue.appendleft((1, 1, 0))  # (y, x, cost)
+    queue.appendleft((0, 0, A[0][0]))  # (y, x, cost)
+    A[0][0] = 0
 
     while queue:
         y, x, cost = queue.pop()
 
-        # Delay visit of a cell by its cost.
-
-        A[y][x] -= 1
-
-        if A[y][x] != 0:
+        if A[y][x] > 0:
+            A[y][x] -= 1
             queue.appendleft((y, x, cost))
             continue
 
@@ -62,7 +60,7 @@ def kings_path(A):
 
 if __name__ == "__main__":
     board = [
-        [0, 4, 7, 1, 3],
+        [1, 4, 7, 1, 3],
         [5, 8, 2, 9, 6],
         [1, 3, 4, 7, 2],
         [6, 2, 5, 1, 8],
