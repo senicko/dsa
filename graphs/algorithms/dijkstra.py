@@ -4,38 +4,27 @@ from queue import PriorityQueue
 
 def dijkstra(G, s):
     n = len(G)
+    parents = [None] * n
+    visited = [False] * n
 
     dist = [inf] * n
-    visited = [False] * n
-    parents = [None] * n
     dist[s] = 0
 
     queue = PriorityQueue()
     queue.put((dist[s], s))
 
     while not queue.empty():
-        _, v = queue.get()
+        v_dist, v = queue.get()
 
-        # Skip already visited vertices.
-        # It is possible that some vertices
-        # will be put to the queue multiple times.
-
+        # If we have already found a shorter path
+        # to v, continue.
         if visited[v]:
             continue
-
-        # At this point we know that there is no better path to v.
-        # If there was a better path, there would be a vertex u
-        # with dist[u] < dist[v]. Because of that, we can mark v
-        # as visited.
 
         visited[v] = True
 
         for u, w in G[v]:
-            # Inlined relax. Note that we don't have
-            # to check if u was visited, because
-            # it's distance is for sure less.
-
-            if dist[u] > dist[v] + w:
+            if not visited[u] and dist[u] > dist[v] + w:
                 dist[u] = dist[v] + w
                 parents[u] = v
                 queue.put((dist[u], u))
