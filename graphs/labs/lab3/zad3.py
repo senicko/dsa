@@ -30,12 +30,8 @@ def shortest_desc(graph, x, y):
     parents = [None] * n
     dist = [inf] * n
 
-    # Sort edges in descending order relative to
-    # their weights.
-
     edges = extract_edges(graph)
     edges.sort(key=lambda e: e[2], reverse=True)
-    print(edges)
 
     for u, v, w in edges:
         if not visited[u]:

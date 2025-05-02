@@ -4,7 +4,6 @@ def topological_sort(graph):
     visited = [False] * n
 
     def dfs_visit(v):
-        nonlocal result
         visited[v] = True
 
         for u in graph[v]:
@@ -24,7 +23,8 @@ def topological_sort(graph):
     # array as in line 17, we actually want
     # to append to the beginning of the list.
 
-    return reversed(result)
+    result.reverse()
+    return result
 
 
 if __name__ == "__main__":

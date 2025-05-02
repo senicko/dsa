@@ -43,9 +43,9 @@ def union(x, y):
         return
 
     if x.rank > y.rank:
-        y.p = x
+        y.parent = x
     else:
-        x.p = y
+        x.parent = y
         # If both sets had the same rank, increment
         # the height estimate.
         if x.rank == y.rank:
