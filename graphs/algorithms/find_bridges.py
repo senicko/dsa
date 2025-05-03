@@ -13,13 +13,13 @@ def find_bridges(graph):
     def dfs_visit(v, parent=-1):
         nonlocal time
 
+        visited[v] = True
         # Init low[v] with discover time.
         time += 1
         low[v] = discovery[v] = time
 
         for u in graph[v]:
             if not visited[u]:
-                visited[u] = True
                 dfs_visit(u, v)
 
                 # Can u reach vertex with discovery
@@ -39,7 +39,6 @@ def find_bridges(graph):
 
     for v in range(n):
         if not visited[v]:
-            visited[v] = True
             dfs_visit(v)
 
     return bridges
