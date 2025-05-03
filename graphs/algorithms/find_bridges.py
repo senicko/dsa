@@ -7,12 +7,11 @@ def find_bridges(graph):
 
     time = 0
     visited = [False] * n
-
-    low = [inf] * n
     discovery = [0] * n
+    low = [inf] * n
 
     def dfs_visit(v, parent=-1):
-        nonlocal discovery, visited, time
+        nonlocal time
 
         # Init low[v] with discover time.
         time += 1

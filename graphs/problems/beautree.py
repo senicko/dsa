@@ -1,7 +1,7 @@
 """
 Sorting         O(ElogE) <= O(ElogV^2) = O(ElogV)
-Building MSTs   O(VElog*E) ~ O(VE)
-Total:          O(ElogV + VE) = O(E(logV + V)) = O(EV)
+Building MSTs   O(VElog*E)
+Total: O(EVlog*E)
 """
 
 from math import inf, isinf
