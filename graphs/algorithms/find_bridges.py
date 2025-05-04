@@ -10,32 +10,32 @@ def find_bridges(graph):
     discovery = [0] * n
     low = [inf] * n
 
-    def dfs_visit(v, parent=-1):
+    def dfs_visit(u, parent=-1):
         nonlocal time
 
-        visited[v] = True
+        visited[u] = True
         # Init low[v] with discover time.
         time += 1
-        low[v] = discovery[v] = time
+        low[u] = discovery[u] = time
 
-        for u in graph[v]:
-            if not visited[u]:
-                dfs_visit(u, v)
+        for v in graph[u]:
+            if not visited[v]:
+                dfs_visit(v, u)
 
-                # Can u reach vertex with discovery
+                # Can v reach vertex with discovery
                 # time lower than low[v]?
 
-                low[v] = min(low[v], low[u])
+                low[u] = min(low[u], low[v])
 
-                # If lowest discovery time reachable by u is
-                # greater than discovery[v], {v, u} is a bridge.
+                # If lowest discovery time reachable by v is
+                # greater than discovery[v], {v, v} is a bridge.
 
-                if low[u] > discovery[v]:
-                    bridges.append((v, u))
-            elif u != parent:
+                if low[v] > discovery[u]:
+                    bridges.append((u, v))
+            elif v != parent:
                 # Does the vertex to which we have found
                 # a back edge has lower discovery time?
-                low[v] = min(low[v], discovery[u])
+                low[u] = min(low[u], discovery[v])
 
     for v in range(n):
         if not visited[v]:
