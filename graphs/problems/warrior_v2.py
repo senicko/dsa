@@ -32,7 +32,7 @@ def warrior(G, s, t):
             real_w = w
             real_stamina = stamina
 
-            if real_w > stamina:
+            if real_w > real_stamina:
                 real_w += 8
                 real_stamina = 16
 
