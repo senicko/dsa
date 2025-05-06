@@ -1,4 +1,8 @@
-from egz1atesty import runtests
+"""
+Kiedy przetwarzamy rower, interesuje nas odległość od s do roweru
+i odległość z roweru do t, czyli odległość z t do roweru.
+"""
+
 from queue import PriorityQueue
 from math import inf, floor
 
@@ -40,8 +44,10 @@ def dijkstra(graph, s):
 
 def armstrong(B, G, s, t):
     graph = build_graph(G)
+
     dist_s_t = dijkstra(graph, s)
     dist_t_s = dijkstra(graph, t)
+
     result = dist_s_t[t]
 
     for u, p, q in B:
