@@ -14,7 +14,6 @@ def find_bridges(graph):
         nonlocal time
 
         visited[u] = True
-        # Init low[v] with discover time.
         time += 1
         low[u] = discovery[u] = time
 
@@ -30,7 +29,7 @@ def find_bridges(graph):
                 # If lowest discovery time reachable by v is
                 # greater than discovery[v], {v, v} is a bridge.
 
-                if low[v] == discovery[v]:
+                if low[v] > discovery[u]:
                     bridges.append((u, v))
             elif v != parent:
                 # Does the vertex to which we have found
