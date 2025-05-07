@@ -29,19 +29,20 @@ def articulation_points(graph):
             elif parent != v:
                 low[u] = min(low[u], discovery[v])
 
+        if parent is None and children >= 2:
+            points.add(u)
+
         return children
 
     for u in range(n):
         if not visited[u]:
-            if dfs_visit(u) >= 2:
-                points.add(u)
+            dfs_visit(u)
 
     return points
 
 
 def koleje(B):
     n = max(map(lambda x: max(x[0], x[1]), B)) + 1
-
     graph = [[] for _ in range(n)]
 
     for u, v in B:

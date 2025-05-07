@@ -8,10 +8,9 @@ def find_articulation_points(graph):
     low = [inf] * n
     discovery = [inf] * n
     visited = [False] * n
+    points = set()
 
-    articulation_points = []
-
-    def dfs_visit(u, parent=-1):
+    def dfs_visit(u, parent=None):
         nonlocal time
 
         time += 1
@@ -23,25 +22,21 @@ def find_articulation_points(graph):
             if not visited[v]:
                 children += 1
                 dfs_visit(v, u)
-                low[u] = min(low[v], low[u])
+                low[u] = min(low[u], low[v])
 
-                # Note the >= operator. When we are looking for
-                # articulation points >= is sufficient, contrary to
-                # finding bridges, when we have to check if
-                # low[v] > discovery[u].
-                if parent != -1 and low[v] == discovery[v]:
-                    articulation_points.append(u)
-            elif v != parent:
+                if parent is not None and low[v] >= discovery[u]:
+                    points.add(u)
+            elif parent != v:
                 low[u] = min(low[u], discovery[v])
 
-        return children
+        if parent is None and children >= 2:
+            points.add(u)
 
     for u in range(n):
         if not visited[u]:
-            if dfs_visit(u) >= 2:
-                articulation_points.append(u)
+            dfs_visit(u)
 
-    return articulation_points
+    return points
 
 
 if __name__ == "__main__":
