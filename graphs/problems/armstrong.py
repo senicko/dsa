@@ -2,7 +2,6 @@
 Kiedy przetwarzamy rower, interesuje nas odległość od s do roweru
 i odległość z roweru do t, czyli odległość z t do roweru.
 """
-
 from queue import PriorityQueue
 from math import inf, floor
 
@@ -54,6 +53,3 @@ def armstrong(B, G, s, t):
         result = min(result, dist_s_t[u] + dist_t_s[u] * (p / q))
 
     return floor(result)
-
-
-runtests(armstrong, all_tests=True)

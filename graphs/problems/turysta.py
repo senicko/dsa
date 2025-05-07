@@ -1,4 +1,3 @@
-from egzP1btesty import runtests
 from queue import PriorityQueue
 from math import inf
 
@@ -49,6 +48,3 @@ def turysta(G, D, L):
             if dist[v][visits + 1] > alt:
                 dist[v][visits + 1] = alt
                 queue.put((alt, v, visits + 1))
-
-
-runtests(turysta)

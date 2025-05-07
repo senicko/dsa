@@ -1,4 +1,3 @@
-from kol3btesty import runtests
 from queue import PriorityQueue
 from math import inf
 
@@ -33,7 +32,3 @@ def airports(G, A, s, t):
                 queue.put((alternative, v))
 
     return dist[t]
-
-
-# zmien all_tests na True zeby uruchomic wszystkie testy
-runtests(airports, all_tests=True)

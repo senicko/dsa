@@ -1,4 +1,3 @@
-from egzP5btesty import runtests
 from math import inf
 
 
@@ -50,6 +49,3 @@ def koleje(B):
         graph[v].append(u)
 
     return len(articulation_points(graph))
-
-
-runtests(koleje, all_tests=True)

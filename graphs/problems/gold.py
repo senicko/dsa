@@ -1,4 +1,3 @@
-from egz1Atesty import runtests
 from queue import PriorityQueue
 from math import inf
 
@@ -47,6 +46,3 @@ def gold(G, V, s, t, r):
         min_dist = min(min_dist, dist)
 
     return min_dist
-
-
-runtests(gold, all_tests=True)
