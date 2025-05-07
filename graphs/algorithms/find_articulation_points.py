@@ -8,7 +8,7 @@ def find_articulation_points(graph):
     low = [inf] * n
     discovery = [inf] * n
     visited = [False] * n
-    points = set()
+    points = [False] * n
 
     def dfs_visit(u, parent=None):
         nonlocal time
@@ -25,12 +25,12 @@ def find_articulation_points(graph):
                 low[u] = min(low[u], low[v])
 
                 if parent is not None and low[v] >= discovery[u]:
-                    points.add(u)
+                    points[u] = True
             elif parent != v:
                 low[u] = min(low[u], discovery[v])
 
         if parent is None and children >= 2:
-            points.add(u)
+            points[u] = True
 
     for u in range(n):
         if not visited[u]:
