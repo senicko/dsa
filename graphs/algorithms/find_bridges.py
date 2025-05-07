@@ -30,7 +30,7 @@ def find_bridges(graph):
                 # If lowest discovery time reachable by v is
                 # greater than discovery[v], {v, v} is a bridge.
 
-                if low[v] > discovery[u]:
+                if low[v] == discovery[v]:
                     bridges.append((u, v))
             elif v != parent:
                 # Does the vertex to which we have found

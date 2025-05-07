@@ -29,7 +29,7 @@ def find_articulation_points(graph):
                 # articulation points >= is sufficient, contrary to
                 # finding bridges, when we have to check if
                 # low[v] > discovery[u].
-                if parent != -1 and low[v] >= discovery[u]:
+                if parent != -1 and low[v] == discovery[v]:
                     articulation_points.append(u)
             elif v != parent:
                 low[u] = min(low[u], discovery[v])
@@ -38,9 +38,7 @@ def find_articulation_points(graph):
 
     for u in range(n):
         if not visited[u]:
-            children = dfs_visit(u)
-
-            if children >= 2:
+            if dfs_visit(u) >= 2:
                 articulation_points.append(u)
 
     return articulation_points
