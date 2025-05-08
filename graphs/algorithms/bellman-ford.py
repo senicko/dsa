@@ -13,9 +13,7 @@ def bellman_ford(G, s):
             distances[u] = distances[v] + w
             parent[u] = v
 
-    # Examine all of |E| edges |V| - 1 times,
-    # resulting in O(V^2 + VE) complexity.
-
+    # Examine all of |E| edges |V| - 1 times
     for _ in range(n - 1):
         for v in G:
             for u, w in v:
@@ -24,7 +22,6 @@ def bellman_ford(G, s):
     # Return a boolean value indicating whether
     # there is a negative-weight cycle reachable from
     # source vertex.
-
     for v in range(n):
         for u, w in G[v]:
             if distances[u] > distances[v] + w:
