@@ -5,7 +5,6 @@ from queue import PriorityQueue
 def dijkstra(G, s):
     n = len(G)
     parents = [None] * n
-    visited = [False] * n
 
     dist = [inf] * n
     dist[s] = 0
@@ -18,13 +17,11 @@ def dijkstra(G, s):
 
         # If we have already found a shorter path
         # to v, continue.
-        if visited[v]:
+        if v_dist > dist[v]:
             continue
 
-        visited[v] = True
-
         for u, w in G[v]:
-            if not visited[u] and dist[u] > dist[v] + w:
+            if dist[u] > dist[v] + w:
                 dist[u] = dist[v] + w
                 parents[u] = v
                 queue.put((dist[u], u))
