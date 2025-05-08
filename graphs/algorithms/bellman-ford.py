@@ -25,8 +25,8 @@ def bellman_ford(G, s):
     # there is a negative-weight cycle reachable from
     # source vertex.
 
-    for v in G:
-        for u, w in v:
+    for v in range(n):
+        for u, w in G[v]:
             if distances[u] > distances[v] + w:
                 return False
 

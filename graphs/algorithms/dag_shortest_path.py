@@ -11,16 +11,16 @@ def topological_sort(G):
     order = []
 
     def dfs_visit(v):
+        visited[v] = True
+
         for u, _ in G[v]:
             if not visited[u]:
-                visited[u] = True
                 dfs_visit(u)
 
         order.append(v)
 
     for v in range(n):
         if not visited[v]:
-            visited[v] = True
             dfs_visit(v)
 
     order.reverse()

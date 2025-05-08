@@ -30,7 +30,8 @@ def floyd_warshall(graph):
         for u in range(n):
             for v in range(n):
                 # (*)
-                if dist[u][v] > dist[u][k] + dist[k][v]:
-                    dist[u][v] = dist[u][k] + dist[k][v]
+                alt = dist[u][k] + dist[k][v]
+                if dist[u][v] > alt:
+                    dist[u][v] = alt
 
     return dist

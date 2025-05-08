@@ -5,8 +5,8 @@ def dfs_list(graph):
     n = len(graph)
 
     time = 0
-    visited = [False] * n
     parent = [None] * n
+    visited = [False] * n
     discovery = [inf] * n
     processed = [inf] * n
 
