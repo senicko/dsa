@@ -4,27 +4,26 @@ from math import inf
 def bellman_ford(G, s):
     n = len(G)
 
-    distances = [inf] * n
+    dist = [inf] * n
     parent = [None] * n
-    distances[s] = 0
-
-    def relax(v, u, w):
-        if distances[u] > distances[v] + w:
-            distances[u] = distances[v] + w
-            parent[u] = v
+    dist[s] = 0
 
     # Examine all of |E| edges |V| - 1 times
     for _ in range(n - 1):
-        for v in G:
-            for u, w in v:
-                relax(v, u, w)
+        for u in range(n):
+            for v, w in G[u]:
+                alt = dist[u] + w
+
+                if dist[v] > alt:
+                    dist[v] = alt
+                    parent[v] = u
 
     # Return a boolean value indicating whether
     # there is a negative-weight cycle reachable from
     # source vertex.
-    for v in range(n):
-        for u, w in G[v]:
-            if distances[u] > distances[v] + w:
+    for u in range(n):
+        for v, w in G[u]:
+            if dist[v] > dist[u] + w:
                 return False
 
     return True
