@@ -5,8 +5,10 @@ def lis_top_down_aux(a, i, cache):
     res = 1
 
     for k in range(i):
+
         # If a[k] < a[i], so if lis ending at k can
         # be extended by a[i], take max.
+
         if a[k] < a[i]:
             res = max(res, lis_top_down_aux(a, k, cache) + 1)
 
