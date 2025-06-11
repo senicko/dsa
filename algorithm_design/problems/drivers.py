@@ -1,35 +1,18 @@
 """
+C(i, j) = liczba punktów kontrolnych między przesiadkami numer `i` i `j`
 
-C(i, j) - liczba punktów kontrolnych między przesiadkami numer `i` i `j`
-
-T(i, who) = najmniejza liczba punktów kontrolnych jaką przejedzie Marian
+T(i, who) - najmniejza liczba punktów kontrolnych jaką przejedzie Marian
             jeżeli z punktu i wyruszył `who`.
 
 T(i, who) = {
-    if who == "Marian":
-        min(
-            T(i + 1, "Jacek") + C(i, i + 1),
-            T(i + 2, "Jacek") + C(i, i + 2),
-            T(i + 3, "Jacek") + C(i, i + 3)
-        )
-
-
-    if who == "Jacek":
-        min(
-            T(i + 1, "Marian"),
-            T(i + 2, "Marian"),
-            T(i + 3, "Marian")
-        )
+    if who == "Marian": for k in range(1, 4) min(T(i + k, "Jacek") + C(i, i + k))
+    if who == "Jacek": for k in range (1, 4) min(T(i + k, "Marian")
 }
-
 """
 
 
-from kol2atesty import runtests
 from math import inf
 
-
-type Point = tuple[int, bool]
 
 M = 0
 J = 1
@@ -97,7 +80,3 @@ def drivers(P, _):
         stop = sol[stop][driver]
 
     return ans
-
-
-# zmien all_tests na True zeby uruchomic wszystkie testy
-runtests(drivers, all_tests=True)
